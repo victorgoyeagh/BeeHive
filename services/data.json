@@ -1,0 +1,19 @@
+[
+    {
+        "Queen": {
+            "Lifespan" : 100,
+            "HitPoints" : 8,
+            "Count" : 1
+        },
+        "Worker": {
+            "Lifespan" : 75,
+            "HitPoints" : 10,
+            "Count" : 5
+        },
+        "Drone": {
+            "Lifespan" : 50,
+            "HitPoints" : 12,
+            "Count" : 8
+        }
+    }
+]

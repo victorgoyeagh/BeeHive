@@ -1,0 +1,163 @@
+@import "mixins.scss";
+@import "animations.scss";
+@import "normalise.scss";
+
+//variables 
+$color_back--grey: #dbe1e6;
+
+body {
+  overflow-x: hidden;
+  background: $color_back--grey;
+  font-family: 'Amatic SC', cursive;
+}
+
+h1 {
+  @include font-size(10);
+  margin: 0 auto -30px;
+  display: block;
+  text-align: center;
+  text-shadow: 2px -2px 0 white;
+}
+
+h4 {
+  @include font-size(6);
+}
+
+.bee-controls {
+  margin: 30px 0;
+
+  button {
+    width: auto;
+    padding: 10px;
+    min-width: 120px;
+  }
+}
+
+ul.beehive {
+  background-color: white;
+  padding: 50px 20px;
+  border: 10px solid #33363e;
+  @include radius(40px);
+  position: relative;
+  max-width: 600px;
+  margin: auto;
+  z-index: -1;
+  min-height: 450px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    right: -50px;
+    bottom: -60px;
+    display: block;
+    width: 200px;
+    height: 200px;
+    background-image: url('../../images/honey-pot.png');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  li.center {
+     text-align: center;
+     width: 100%;
+  }
+
+  span {
+    display: inline-block;
+  }
+}
+
+.bee {
+  position: relative;
+  display: inline-block;
+
+  .hitpoints {
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    @include font-size(0);
+    @include transition(all, ease-out, 0.5s);
+  }
+
+  .hitpoints.animate {
+    top: -20%;
+    left: 29%;
+    @include pulse;
+    @include font-size(4);
+  }
+
+  .lifespan {
+    position: absolute;
+    top: 68px;
+    right: 0;
+    width: auto;
+    text-shadow: 2px 3px 2px bisque;
+    @include font-size(3);
+  }
+
+  .drone,
+  .queen,
+  .worker {
+    position: relative;
+    display: block;
+    width: 100px;
+    height: 100px;
+    background-image: url('../../images/bee-animated.gif');
+    background-size: cover;
+    background-position: center center;
+    @include transition(all, ease-out, 0.5s);
+  }
+
+  .drone.animate,
+  .queen.animate,
+  .worker.animate {
+    @include shake;
+  }
+
+  .drone:after,
+  .queen:after,
+  .worker:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    @include font-size(3)
+  }
+
+  .drone:after {
+    content: '\265F';
+  }
+
+  .queen:after {
+    content: '\265B';
+  }
+
+  .worker:after {
+    content: '\265D';
+  }
+}
+
+.beeanim-enter {
+  opacity: .01;
+  width: 0;
+}
+
+.beeanim-enter.beeanim-enter-active {
+  opacity: 1;
+  width: 100px;
+  transition: 700ms;
+}
+
+.beeanim-leave {
+  opacity: 1;
+  width: 100px;
+}
+
+.beeanim-leave.beeanim-leave-active {
+  opacity: .01;
+  width: 0;
+  transition: 700ms;
+}

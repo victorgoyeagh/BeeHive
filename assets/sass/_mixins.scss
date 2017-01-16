@@ -1,0 +1,196 @@
+/** Mixins **/
+
+// font size
+@mixin font-size($sizeValue: 1.6) {
+    font-size: ($sizeValue * 10) + px;
+    font-size: $sizeValue + rem;
+}
+
+@mixin title-decor {
+    content: "";
+    display: block;
+    background-color: $color--harsh-yellow;
+    @include rotate(90deg);
+    @include masked-element(false);
+    margin: 30px auto;
+    padding: 0px;
+    width: 34px;
+    height: 1px;
+}
+
+@mixin masked-element($var) {
+    background: linear-gradient( 45deg, #992700 0%, #992700 28%, #c26100 58%, #a13100 100%);
+    -webkit-text-fill-color: transparent;
+    @if $var {
+        -webkit-background-clip: text;
+    }
+}
+
+@mixin greyscale($val) {
+    filter: url("data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;filter id=\'grayscale\'&gt;&lt;feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/&gt;&lt;/filter&gt;&lt;/svg&gt;#grayscale");
+    /* Firefox 10+, Firefox on Android */
+    filter: rgba(255, 255, 255, $val);
+    /* IE6-9 */
+    -webkit-filter: grayscale($val);
+    /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+}
+
+@mixin remove-paddings-and-margins {
+    padding: 0px;
+    margin: 0px;
+}
+
+@mixin top-btm-padding($valve1,$valve2) {
+    padding-top: $valve1;
+    padding-bottom: $valve2;
+}
+
+@mixin top-btm-margin($valve1,$valve2) {
+    margin-top: $valve1;
+    margin-bottom: $valve2;
+}
+
+@mixin rotate($valve) {
+    -ms-transform: rotate($valve);
+    /* IE 9 */
+    -webkit-transform: rotate($valve);
+    /* Chrome, Safari, Opera */
+    transform: rotate($valve);
+}
+
+@mixin block-element {
+    display: block;
+    width: 100%;
+    min-height: 1px;
+    box-sizing: initial;
+}
+
+@mixin undeline-element {
+    border-bottom: 1px solid $tertiary-color;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+}
+
+@mixin radius($value) {
+    border-radius: $value;
+    -o-border-radius: $value;
+    -moz-border-radius: $value;
+    -webkit-border-radius: $value;
+}
+
+@mixin box-sized {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+@mixin opacity($value) {
+    $IEValue: $value*100;
+    opacity: $value;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity="+$IEValue+")";
+    filter: alpha(opacity=$IEValue);
+}
+
+@mixin icon($xpos, $ypos, $width, $height) {
+    background: url(#{$assetPath + $sprite-image}) no-repeat $xpos $ypos;
+    width: $width;
+    height: $height;
+    text-indent: -99999px;
+    overflow: hidden;
+} 
+
+@mixin shadow($val1, $val2, $val3, $color) {
+    -moz-box-shadow: $val1 $val2 $val3 $color;
+    -webkit-box-shadow: $val1 $val2 $val3 $color;
+    box-shadow: $val1 $val2 $val3 $color;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=$val1, Direction=135, Color='$color')";
+    filter: "progid: DXImageTransform.Microsoft.Shadow(Strength=$val1, Direction=135, Color='$color')";
+}
+
+@mixin responsive-image {
+    width: 100% !important;
+    display: block;
+}
+
+@mixin gradient($from, $to) {
+    background: $from;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, $from 0%, $to 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, $from), color-stop(100%, $to));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, $from 0%, $to 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, $from 0%, $to 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, $from 0%, $to 100%);
+    /* IE10+ */
+    background: linear-gradient(to bottom, $from 0%, $to 100%);
+    /* W3C */
+    filter: "progid: DXImageTransform.Microsoft.gradient( startColorstr='$from', endColorstr='$to', GradientType=0)";
+    /* IE6-9 */
+}
+
+@mixin radial-gradient($from, $to) {
+    background: -moz-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, $from), color-stop(100%, $to));
+    background: -webkit-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -o-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: -ms-radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background: radial-gradient(center, circle cover, $from 0%, $to 100%);
+    background-color: $from;
+}
+
+
+/* filters */
+@mixin pulse { 
+    -webkit-animation-name: pulse;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 3;
+    -webkit-animation-timing-function: linear;
+    -webkit-transform-origin: 50% 100%;
+}
+
+@mixin shake { 
+    -webkit-animation-name: shake;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-iteration-count: 3;
+    -webkit-animation-timing-function: linear;
+    -webkit-transform-origin: 50% 100%;
+}
+
+
+@mixin show-object {
+    visibility: visible;
+    opacity: 1;
+    -prefixes-transition-delay: 0s, 0s;
+}
+
+@mixin hide-object {
+    visibility: hidden;
+    opacity: 0;
+    -prefixes-transition-property: opacity, visibility;
+    -prefixes-transition-duration: .4s, 0s;
+    -prefixes-transition-delay: 0s, .4s;
+}
+
+@mixin transition($prop,$effect,$speed) {
+    -webkit-transition: $prop $effect $speed;
+    -moz-transition: $prop $effect $speed;
+    -o-transition: $prop $effect $speed;
+    transition: $prop $effect $speed;
+}
+
+@mixin brightness($amount) {
+    -webkit-filter: brightness($amount);
+    filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' ><filter id='bright125'><feComponentTransfer><feFuncR type='linear' slope='1.25'/><feFuncG type='linear' slope='1.25' /><feFuncB type='linear' slope='1.25' /></feComponentTransfer></filter></svg>#bright125");
+    filter: brightness($amount);
+}
+
+@mixin stroke ($color,$shadow-color,$stroke-color,$width) {
+    color: $color;
+    text-shadow: -$width -$width 0 $shadow-color, $width -$width 0 $shadow-color, -$width $width 0 $shadow-color, $width $width 0 $shadow-color;
+    -webkit-text-fill-color: $color;
+    -webkit-text-stroke-width: $width;
+    -webkit-text-stroke-color: $stroke-color;
+}
